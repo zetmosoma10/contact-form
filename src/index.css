@@ -8,4 +8,8 @@
   body {
     font-family: "Karla", sans-serif;
   }
+
+  .custome-label {
+    @apply block text-base leading-[150%] text-darkGrey mb-2;
+  }
 }

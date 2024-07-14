@@ -1,8 +1,10 @@
+import ContactForm from "./components/ContactForm";
+
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <div className="bg-lightGreen flex items-center min-h-screen">
+      <ContactForm />
+    </div>
   );
 }
 
