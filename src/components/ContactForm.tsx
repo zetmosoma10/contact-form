@@ -1,6 +1,30 @@
+import { FieldValues, useForm } from "react-hook-form";
+
+interface FormDataType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: String;
+  queryType: boolean;
+  checkbox: boolean;
+}
+
 const ContactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataType>();
+
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+  };
+
   return (
-    <form className="bg-white mx-w-[736px] mx-auto p-6 md:p-10 rounded-2xl text-darkGrey m-20">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-white mx-w-[736px] mx-auto p-6 md:p-10 rounded-2xl text-darkGrey m-20"
+    >
       <h1 className="font-bold text-3xl tracking-[-1px] mb-8">Contact Us</h1>
       <div className="md:flex md:items-center md:space-x-4">
         <div className="mb-6">
@@ -8,6 +32,7 @@ const ContactForm = () => {
             First Name
           </label>
           <input
+            {...register("firstName")}
             className="border border-mediumGrey w-full p-6 py-3 rounded-lg outline-none focus:border-green"
             type="text"
             id="firstName"
@@ -18,6 +43,7 @@ const ContactForm = () => {
             Last Name
           </label>
           <input
+            {...register("lastName")}
             className="border border-mediumGrey w-full p-6 py-3 rounded-lg outline-none focus:border-green"
             type="text"
             id="lastName"
@@ -29,6 +55,7 @@ const ContactForm = () => {
           Email Address
         </label>
         <input
+          {...register("email")}
           className="border border-mediumGrey w-full p-6 py-3 rounded-lg outline-none focus:border-green"
           type="email"
           id="email"
@@ -44,9 +71,11 @@ const ContactForm = () => {
             htmlFor="enquity"
           >
             <input
+              {...register("queryType")}
               className="border border-mediumGrey"
               type="radio"
               id="enquity"
+              value="enquity"
             />
             <span>General Enquity</span>
           </label>
@@ -55,9 +84,11 @@ const ContactForm = () => {
             htmlFor="support"
           >
             <input
+              {...register("queryType")}
               className="border border-mediumGrey"
               type="radio"
               id="support"
+              value="support"
             />
             <span>Support Request</span>
           </label>
@@ -68,14 +99,15 @@ const ContactForm = () => {
           Message
         </label>
         <textarea
+          {...register("message")}
           className="border border-mediumGrey w-full p-6 py-3 rounded-lg outline-none focus:border-green"
           id="message"
         ></textarea>
       </div>
-      <div className="mb-6">
-        <label className="custome-label space-x-4" htmlFor="">
-          <input type="checkbox" id="" />
-          <span>I consent to being contacted by the team *</span>
+      <div className="mb-6 space-x-4">
+        <input {...register("checkbox")} type="checkbox" id="checkbox" />
+        <label className="text-base text-darkGreen " htmlFor="checkbox">
+          I consent to being contacted by the team *
         </label>
       </div>
       <button
