@@ -7,6 +7,7 @@ const ContactForm = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<FormDataType>({
     resolver: zodResolver(schema),
@@ -14,6 +15,8 @@ const ContactForm = () => {
       queryType: "",
     },
   });
+
+  const selectedQueryType = watch("queryType");
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
@@ -77,12 +80,12 @@ const ContactForm = () => {
         )}
       </div>
       <div className="mb-6">
-        <label className="custome-label" htmlFor="">
-          Query Types
-        </label>
+        <label className="custome-label">Query Types</label>
         <div className="md:flex md:items-center md:justify-between md:space-x-4">
           <label
-            className="custome-label flex items-center py-3 px-6 space-x-3 text-nowrap  border border-mediumGrey rounded-lg md:w-full"
+            className={`${
+              selectedQueryType === "enquity" && "bg-lightGreen border-green"
+            } custome-label flex items-center py-3 px-6 space-x-3 text-nowrap  border border-mediumGrey rounded-lg md:w-full`}
             htmlFor="enquity"
           >
             <input
@@ -95,7 +98,9 @@ const ContactForm = () => {
             <span>General Enquity</span>
           </label>
           <label
-            className="custome-label flex items-center py-3 px-6 space-x-3 text-nowrap  border border-mediumGrey rounded-lg md:w-full"
+            className={`${
+              selectedQueryType === "support" && "bg-lightGreen border-green"
+            } custome-label flex items-center py-3 px-6 space-x-3 text-nowrap  border border-mediumGrey rounded-lg md:w-full`}
             htmlFor="support"
           >
             <input
